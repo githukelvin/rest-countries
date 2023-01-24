@@ -85,3 +85,103 @@ tog.addEventListener("click", () => {
  dp.onclick = () => {
    dp.classList.toggle("active");
  };
+
+ let search = document.querySelector(".seach");
+
+ search.addEventListener("click", () => {
+   let inp = document.querySelector("input").value;
+   let bar = document.querySelector(".bars");
+   bar.style.display ="none";
+     const url = `https://restcountries.com/v2/name/${inp}`;
+  //  console.log(url);
+     const bdz = document.querySelector(".flags");
+     const bdiz = document.querySelector(".countries");
+    bdz.innerHTML="";
+       const response = fetch(url);
+       response.then(data =>{ return data.json()})
+       .then(data =>{
+        const {
+          name,
+          population,
+          languages,
+          capital,
+          flag,
+          topLevelDomain,
+          subregion,
+          region,
+          currencies,
+          nativeName,
+          borders,
+        } = data[0];
+  let h1 = document.createElement("h1");
+  let smallElements = languages.map(
+    (language) => `<small>${language.name},</small>`
+  );
+  h1.innerHTML = smallElements.join(" ");
+
+    let languageDiv = (h1.innerHTML = smallElements.join(" "));;
+
+    function creteps(borders){
+      for (let i = 0; i < borders.length; i++) {
+        let p = document.createElement("p");
+        p.innerHTML = borders[i];
+      }
+    }
+
+ let para = creteps(borders);
+
+ console.log(para);
+
+             let div = `
+      
+ <p class="back" onclick="CLICKED(getAllCountries())" ><i class="fa-solid fa-arrow-left"></i> Back</p>   
+                 <div class="country">
+                    <div class="fimg">
+            <img src='${flag}' alt='${name} image'>
+                    </div>
+                    <div class="cinfo">
+                        <h2>${name}</h2>
+                        <div class="cdetails">
+                           <div class="left">
+                            <h1>Native Name : <small>${nativeName}</small></h1>
+                            <h1>Population : <small>${population.toLocaleString()}</small></h1>
+                            <h1>Region: <small>${region}</small></h1>
+                            <h1>Sub Region : <small>${subregion}</small></h1>
+                            <h1>Capital : <small>${capital}</small></h1>
+                           </div>
+                        <div class="right">
+                            <h1>Top Level Domain: <small>${topLevelDomain}</small></h1>
+                            <h1>Currencies : <small>${currencies.code}</small></h1>
+                           <h1>Languages: ${languageDiv}</h1>
+                        </div>
+
+                        </div>
+
+                        <div class="border">
+                            <h1>Border Countries:</h1>
+
+                           <div class="pa">
+                            ${para}
+                           </div>
+                        </div>
+                    </div>
+                 </div>
+      `;
+          
+       bdiz.innerHTML= div;
+      
+       console.log(div);
+        });
+          })
+function CLICKED(callback){
+  callback;
+  const bdz = document.querySelector(".flags");
+  const bdiz = document.querySelector(".countries");
+  bdiz.innerHTML = "";
+    let bar = document.querySelector(".bars");
+    bar.style.display = " flex";
+
+}
+      
+
+ 

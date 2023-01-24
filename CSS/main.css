@@ -245,4 +245,102 @@ main {
 }
 .flags .flag .details h3 small {
   font-weight: 400;
+}
+
+.seach {
+  width: 50px;
+  background: transparent;
+  height: 100%;
+  cursor: pointer;
+}
+
+.countries {
+  display: flex;
+  flex-direction: column;
+}
+.countries .back {
+  cursor: pointer;
+  color: var(--Text);
+  background: var(--Tt);
+  width: fit-content;
+  padding: 9px 30px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+  margin-left: 24px;
+  margin-top: 38px;
+  place-items: center;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+.countries .country {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: auto;
+  gap: 80px;
+  margin-top: 120px;
+}
+.countries .country .fimg {
+  margin-left: 23px;
+  width: 90%;
+  height: 400px;
+  margin-top: -43px;
+}
+.countries .country .fimg img {
+  object-fit: cover;
+  width: 100%;
+}
+.countries .country .cinfo h2 {
+  font-size: 1.932em;
+  color: var(--Text);
+}
+.countries .country .cdetails {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  gap: 70px;
+  margin-top: -5px;
+  padding: 0px 0px 38px 0px;
+}
+.countries .country .cdetails .left, .countries .country .cdetails .right {
+  padding: 25px 0px;
+}
+.countries .country .cdetails h1 {
+  font-size: 1em;
+  padding-top: 0.5em;
+  color: var(--Text);
+}
+.countries .country .cdetails h1 small {
+  font-size: 1.08em;
+  font-weight: 400;
+  padding-right: 3px;
+}
+.countries .country .border {
+  display: flex;
+  flex-direction: row;
+  width: fit-content;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  position: relative;
+  gap: 10px;
+}
+.countries .country .border h1 {
+  font-size: 1em;
+  padding-top: 0.5em;
+  color: var(--Text);
+  margin-top: -8px;
+}
+.countries .country .border .pa {
+  display: flex;
+  flex-direction: row;
+  gap: 6px;
+}
+.countries .country .border .pa p {
+  font-weight: 400;
+  font-size: 0.9em;
+  padding: 4px 23px;
+  background-color: var(--Tt);
+  border-radius: 2px;
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.7);
 }/*# sourceMappingURL=main.css.map */
