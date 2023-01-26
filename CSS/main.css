@@ -27,6 +27,11 @@
   width: 84%;
   margin-inline: auto;
 }
+@media screen and (max-width: 375px) {
+  .container {
+    width: 100%;
+  }
+}
 
 header {
   background: var(--Tt);
@@ -40,6 +45,8 @@ header .top {
 @media screen and (max-width: 375px) {
   header .top {
     padding: 23px 0px;
+    width: 90%;
+    margin-inline: auto;
     align-items: center;
   }
 }
@@ -209,6 +216,7 @@ main {
 }
 @media screen and (max-width: 375px) {
   .flags {
+    width: 100%;
     grid-template-columns: 1fr;
     grid-template-rows: auto;
   }
@@ -221,6 +229,11 @@ main {
   border-radius: 10px;
   background: var(--Tt);
   width: 98%;
+}
+@media screen and (max-width: 375px) {
+  .flags .flag {
+    width: 100%;
+  }
 }
 .flags .flag .img {
   margin-bottom: 12px;
@@ -260,6 +273,12 @@ main {
   display: flex;
   flex-direction: column;
   padding-bottom: 3em;
+}
+@media screen and (max-width: 375px) {
+  .countries {
+    width: 90%;
+    margin-inline: auto;
+  }
 }
 .countries .back {
   cursor: pointer;
