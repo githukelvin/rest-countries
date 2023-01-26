@@ -1,3 +1,5 @@
+
+
 async function getAllCountries() {
   const bdiz = document.querySelector(".flags");
   try {
@@ -13,12 +15,12 @@ async function getAllCountries() {
           flags: { png },
         }) => {
           return `
-        <div class="flag">
+        <div  onclick="coun('${common}')" class="flag">
           <div class="img">
             <img src="${png}" alt="${common} flag">
           </div>
           <div class="details">
-            <h2>${common}</h2>
+            <h2 class="side">${common}</h2>
             <h3>Population: <small>${population.toLocaleString()}</small></h3>
             <h3>Region: <small>${continents[0]}</small></h3>
             <h3>Capital: <small>${capital}</small></h3>
@@ -40,27 +42,29 @@ tog.addEventListener("click", () => {
   document.body.classList.toggle("dark-background");
 });
 
- function show(anything) {
-   document.querySelector(".box").value = anything;
-   const url =`https://restcountries.com/v3.1/region/${anything}`;
-   
-     const bdiz = document.querySelector(".flags");
-    
-       const response = fetch(url);
-       response.then(data => {return data.json()})
-       .then(data =>{
-          
-       bdiz.innerHTML = data
-         .map(
-           ({
-             name: { common },
-             population,
-             continents,
-             capital,
-             flags: { png },
-           }) => {
-             return `
-        <div class="flag">
+function show(anything) {
+  document.querySelector(".box").value = anything;
+  const url = `https://restcountries.com/v3.1/region/${anything}`;
+
+  const bdiz = document.querySelector(".flags");
+
+  const response = fetch(url);
+  response
+    .then((data) => {
+      return data.json();
+    })
+    .then((data) => {
+      bdiz.innerHTML = data
+        .map(
+          ({
+            name: { common },
+            population,
+            continents,
+            capital,
+            flags: { png },
+          }) => {
+            return `
+        <div onclick="coun('${common}')" class="flag">
           <div class="img">
             <img src="${png}" alt="${common} flag">
           </div>
@@ -72,77 +76,70 @@ tog.addEventListener("click", () => {
           </div>
         </div>
       `;
-           }
-         )
-         .join("");
-       }
-         
-       )
-      
-   }
- let dp = document.querySelector(".custom-select");
- dp.onclick = () => {
-   dp.classList.toggle("active");
- };
+          }
+        )
+        .join("");
+    });
+}
+let dp = document.querySelector(".custom-select");
+dp.onclick = () => {
+  dp.classList.toggle("active");
+};
 
- let search = document.querySelector(".seach");
-
- search.addEventListener("click", () => {
-   let inp = document.querySelector("input").value;
-   let bar = document.querySelector(".bars");
-   bar.style.display ="none";
-     const url = `https://restcountries.com/v2/name/${inp}`;
-     const bdz = document.querySelector(".flags");
-     const bdiz = document.querySelector(".countries");
-    bdz.innerHTML="";
-       const response = fetch(url);
-       response.then(data =>{ return data.json()})
-       .then(data =>{
-         const {
-           name,
-           population,
-           languages,
-           capital,
-           flag,
-           topLevelDomain,
-           subregion,
-           region,
-           currencies,
-           nativeName,
-           borders,
-         } = data[0];
-        //  code  for getting the currency name for a country
-        let targetKey = Object.entries(currencies).find(
-          (e) => e[1].name
-        );
-       let code = targetKey[1].name; 
+function what(inp) {
+  let bar = document.querySelector(".bars");
+   bar.style.display = "none";
+  const url = `https://restcountries.com/v2/name/${inp}`;
+  const bdz = document.querySelector(".flags");
+  const bdiz = document.querySelector(".countries");
+  bdz.innerHTML = "";
+  const response = fetch(url);
+  response
+    .then((data) => {
+      return data.json();
+    })
+    .then((data) => {
+      const {
+        name,
+        population,
+        languages,
+        capital,
+        flag,
+        topLevelDomain,
+        subregion,
+        region,
+        currencies,
+        nativeName,
+        borders,
+      } = data[0];
+      //  code  for getting the currency name for a country
+      let targetKey = Object.entries(currencies).find((e) => e[1].name);
+      let code = targetKey[1].name;
 
       //  code for getting languages in a country
-         let h1 = document.createElement("h1");
-         let smallElements = languages.map(
-           (language) => `<small>${language.name}</small>`
-         );
-         let languageDiv = (h1.innerHTML = smallElements.join(" "));
+      let h1 = document.createElement("h1");
+      let smallElements = languages.map(
+        (language) => `<small>${language.name}</small>`
+      );
+      let languageDiv = (h1.innerHTML = smallElements.join(" "));
 
-        // code for  getting borders in a country
-          function getBorder(){
-           
-            if(!data[0].hasOwnProperty("borders")){
-              let p = document.createElement("p");
-              p.innerHTML= "No borders";
-              return p;
-            }
-             else{
-                   let p = document.createElement("p");
-                   let borderNames = borders.map((code) => `<p>${code}</p>`);
+      // code for  getting borders in a country
+      function getBorder() {
+        if (!data[0].hasOwnProperty("borders")) {
+          let p = document.createElement("p");
+          p.innerHTML = "No borders";
+          return p;
+        } else {
+          let p = document.createElement("p");
+          let borderNames = borders.map((code) => `<p>${code}</p>`);
 
-                   let para = (p.innerHTML = borderNames.join(" "));
-                   return para;
-            }
-          }
-        let all=getBorder()
-     
-         let div = `
+          let para = (p.innerHTML = borderNames.join(" "));
+          return para;
+        }
+      }
+      let all = getBorder();
+
+      let div = `
                <p class="back" onclick="CLICKED(getAllCountries())" ><i class="fa-solid fa-arrow-left"></i> Back</p>   
                  <div class="country">
                     <div class="fimg">
@@ -177,16 +174,24 @@ tog.addEventListener("click", () => {
                  </div>
       `;
 
-         bdiz.innerHTML = div;
+      bdiz.innerHTML = div;
+    });
+}
+let search = document.querySelector(".seach");
 
-       });
-          })
-function CLICKED(callback){
+search.addEventListener("click", () => {
+  let inp = document.querySelector("input").value;
+  what(inp);
+});
+function coun(inp) {
+  what(inp);
+}
+
+function CLICKED(callback) {
   callback;
   const bdz = document.querySelector(".flags");
   const bdiz = document.querySelector(".countries");
   bdiz.innerHTML = "";
-    let bar = document.querySelector(".bars");
-    bar.style.display = " flex";
-
+  let bar = document.querySelector(".bars");
+  bar.style.display = " flex";
 }
