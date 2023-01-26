@@ -81,8 +81,16 @@ main {
   justify-content: space-between;
   padding: 50px 0px 0px 25px;
 }
+@media screen and (max-width: 375px) {
+  .bars {
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+  }
+}
 .bars .search {
-  width: 480px;
+  width: min(480px, 100%);
   background: var(--Tt);
   display: flex;
   flex-direction: row;
@@ -251,6 +259,7 @@ main {
 .countries {
   display: flex;
   flex-direction: column;
+  padding-bottom: 3em;
 }
 .countries .back {
   cursor: pointer;
@@ -267,6 +276,12 @@ main {
   border-radius: 5px;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
 }
+@media screen and (max-width: 375px) {
+  .countries .back {
+    margin-left: 0px;
+    margin-top: -20px;
+  }
+}
 .countries .country {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -274,14 +289,26 @@ main {
   gap: 80px;
   margin-top: 120px;
 }
+@media screen and (max-width: 375px) {
+  .countries .country {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
 .countries .country .fimg {
   margin-left: 23px;
-  width: 90%;
+  width: 100%;
   height: 400px;
   margin-top: -43px;
 }
+@media screen and (max-width: 375px) {
+  .countries .country .fimg {
+    margin-left: 0px;
+    height: fit-content;
+  }
+}
 .countries .country .fimg img {
-  object-fit: cover;
+  object-fit: contain;
   width: 100%;
 }
 .countries .country .cinfo h2 {
@@ -295,6 +322,13 @@ main {
   gap: 70px;
   margin-top: -5px;
   padding: 0px 0px 38px 0px;
+}
+@media screen and (max-width: 375px) {
+  .countries .country .cdetails {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    grid-template-rows: auto;
+  }
 }
 .countries .country .cdetails .left, .countries .country .cdetails .right {
   padding: 25px 0px;
@@ -319,6 +353,12 @@ main {
   position: relative;
   gap: 10px;
 }
+@media screen and (max-width: 375px) {
+  .countries .country .border {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
 .countries .country .border h1 {
   font-size: 1em;
   padding-top: 0.5em;
@@ -330,7 +370,13 @@ main {
   flex-direction: row;
   gap: 6px;
 }
-.countries .country .border .pa p {
+@media screen and (max-width: 375px) {
+  .countries .country .border .pa {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+.countries .country .border p {
   font-weight: 400;
   font-size: 0.9em;
   padding: 4px 23px;
