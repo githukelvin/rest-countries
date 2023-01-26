@@ -126,31 +126,31 @@ tog.addEventListener("click", () => {
 
         // code for  getting borders in a country
           function getBorder(){
-            if(data[0].hasOwnProperty("borders")){
+           
+            if(!data[0].hasOwnProperty("borders")){
+              let p = document.createElement("p");
+              p.innerHTML= "No borders";
+              return p;
+            }
+             else{
                    let p = document.createElement("p");
                    let borderNames = borders.map((code) => `<p>${code}</p>`);
 
                    let para = (p.innerHTML = borderNames.join(" "));
                    return para;
             }
-            else{
-               let pa = document.createElement("p");
-               pa.textContent = "No bordering countries available";
-               return pa;
-            }
           }
         let all=getBorder()
      
          let div = `
-      
- <p class="back" onclick="CLICKED(getAllCountries())" ><i class="fa-solid fa-arrow-left"></i> Back</p>   
+               <p class="back" onclick="CLICKED(getAllCountries())" ><i class="fa-solid fa-arrow-left"></i> Back</p>   
                  <div class="country">
                     <div class="fimg">
-            <img src='${flag}' alt='${name} image'>
-                    </div>
-                    <div class="cinfo">
-                        <h2>${name}</h2>
-                        <div class="cdetails">
+                      <img src='${flag}' alt='${name} image'>
+                      </div>
+                        <div class="cinfo">
+                          <h2>${name}</h2>
+                          <div class="cdetails">
                            <div class="left">
                             <h1>Native Name : <small>${nativeName}</small></h1>
                             <h1>Population : <small>${population.toLocaleString()}</small></h1>
