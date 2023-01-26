@@ -43,7 +43,6 @@ tog.addEventListener("click", () => {
  function show(anything) {
    document.querySelector(".box").value = anything;
    const url =`https://restcountries.com/v3.1/region/${anything}`;
-  //  console.log(url);
    
      const bdiz = document.querySelector(".flags");
     
@@ -93,46 +92,56 @@ tog.addEventListener("click", () => {
    let bar = document.querySelector(".bars");
    bar.style.display ="none";
      const url = `https://restcountries.com/v2/name/${inp}`;
-  //  console.log(url);
      const bdz = document.querySelector(".flags");
      const bdiz = document.querySelector(".countries");
     bdz.innerHTML="";
        const response = fetch(url);
        response.then(data =>{ return data.json()})
        .then(data =>{
-        const {
-          name,
-          population,
-          languages,
-          capital,
-          flag,
-          topLevelDomain,
-          subregion,
-          region,
-          currencies,
-          nativeName,
-          borders,
-        } = data[0];
-  let h1 = document.createElement("h1");
-  let smallElements = languages.map(
-    (language) => `<small>${language.name},</small>`
-  );
-  h1.innerHTML = smallElements.join(" ");
+         const {
+           name,
+           population,
+           languages,
+           capital,
+           flag,
+           topLevelDomain,
+           subregion,
+           region,
+           currencies,
+           nativeName,
+           borders,
+         } = data[0];
+        //  code  for getting the currency name for a country
+        let targetKey = Object.entries(currencies).find(
+          (e) => e[1].name
+        );
+       let code = targetKey[1].name; 
 
-    let languageDiv = (h1.innerHTML = smallElements.join(" "));;
+      //  code for getting languages in a country
+         let h1 = document.createElement("h1");
+         let smallElements = languages.map(
+           (language) => `<small>${language.name}</small>`
+         );
+         let languageDiv = (h1.innerHTML = smallElements.join(" "));
 
-    function creteps(borders){
-      for (let i = 0; i < borders.length; i++) {
-        let p = document.createElement("p");
-        p.innerHTML = borders[i];
-      }
-    }
+        // code for  getting borders in a country
+          function getBorder(){
+            if(data[0].hasOwnProperty("borders")){
+                   let p = document.createElement("p");
+                   let borderNames = borders.map((code) => `<p>${code}</p>`);
 
- let para = creteps(borders);
-
- console.log(para);
-
-             let div = `
+                   let para = (p.innerHTML = borderNames.join(" "));
+                   return para;
+            }
+            else{
+               let pa = document.createElement("p");
+               pa.textContent = "No bordering countries available";
+               return pa;
+            }
+          }
+        let all=getBorder()
+     
+         let div = `
       
  <p class="back" onclick="CLICKED(getAllCountries())" ><i class="fa-solid fa-arrow-left"></i> Back</p>   
                  <div class="country">
@@ -151,7 +160,7 @@ tog.addEventListener("click", () => {
                            </div>
                         <div class="right">
                             <h1>Top Level Domain: <small>${topLevelDomain}</small></h1>
-                            <h1>Currencies : <small>${currencies.code}</small></h1>
+                            <h1>Currencies :<small> ${code}</small></h1>
                            <h1>Languages: ${languageDiv}</h1>
                         </div>
 
@@ -161,17 +170,16 @@ tog.addEventListener("click", () => {
                             <h1>Border Countries:</h1>
 
                            <div class="pa">
-                            ${para}
+                               ${all}
                            </div>
                         </div>
                     </div>
                  </div>
       `;
-          
-       bdiz.innerHTML= div;
-      
-       console.log(div);
-        });
+
+         bdiz.innerHTML = div;
+
+       });
           })
 function CLICKED(callback){
   callback;
@@ -182,6 +190,3 @@ function CLICKED(callback){
     bar.style.display = " flex";
 
 }
-      
-
- 
