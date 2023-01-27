@@ -5,16 +5,22 @@ async function getAllCountries() {
   try {
     const response = await fetch("https://restcountries.com/v3.1/all");
     const data = await response.json();
-    bdiz.innerHTML = data
-      .map(
-        ({
-          name: { common },
-          population,
-          continents,
-          capital,
-          flags: { png },
-        }) => {
-          return `
+    display(bdiz, data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+function display(bdiz,data){
+   bdiz.innerHTML = data
+     .map(
+       ({
+         name: { common },
+         population,
+         continents,
+         capital,
+         flags: { png },
+       }) => {
+         return `
         <div  onclick="coun('${common}')" class="flag">
           <div class="img">
             <img src="${png}" alt="${common} flag">
@@ -27,14 +33,10 @@ async function getAllCountries() {
           </div>
         </div>
       `;
-        }
-      )
-      .join("");
-  } catch (error) {
-    console.error(error);
-  }
+       }
+     )
+     .join("");
 }
-
 getAllCountries();
 
 const tog = document.querySelector(".toggle");
@@ -54,31 +56,7 @@ function show(anything) {
       return data.json();
     })
     .then((data) => {
-      bdiz.innerHTML = data
-        .map(
-          ({
-            name: { common },
-            population,
-            continents,
-            capital,
-            flags: { png },
-          }) => {
-            return `
-        <div onclick="coun('${common}')" class="flag">
-          <div class="img">
-            <img src="${png}" alt="${common} flag">
-          </div>
-          <div class="details">
-            <h2>${common}</h2>
-            <h3>Population: <small>${population.toLocaleString()}</small></h3>
-            <h3>Region: <small>${continents[0]}</small></h3>
-            <h3>Capital: <small>${capital}</small></h3>
-          </div>
-        </div>
-      `;
-          }
-        )
-        .join("");
+      display(bdiz, data);
     });
 }
 let dp = document.querySelector(".custom-select");
