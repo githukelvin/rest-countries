@@ -64,7 +64,6 @@ inputVariable.addEventListener("input", () => {
                     break;
                   }
                  }
-                //  console.log(commonname)
                  if(commonname.includes(qinp)){
                   return true;
                  }
@@ -72,7 +71,6 @@ inputVariable.addEventListener("input", () => {
                   return false;
                  }
                })
-               console.log(data)
             display(bdiz, data);
           });
       }
