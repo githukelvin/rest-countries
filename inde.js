@@ -39,6 +39,45 @@ function display(bdiz,data){
 }
 getAllCountries();
 
+
+let inputVariable=document.querySelector("#inputvariable")
+inputVariable.addEventListener("input", () => {
+      let qinp= inputVariable.value.toLowerCase().trim()
+      if(qinp==""){
+        getAllCountries();
+      }
+      else{
+        
+        const bdiz = document.querySelector(".flags");
+        bdiz.innerHTML ="";
+        const response = fetch("https://restcountries.com/v3.1/all");
+        response
+          .then((data) => {
+            return data.json();
+          })
+          .then((data) => {
+               data =  data.filter((data)=>{
+                let commonname;
+                 for (coug in data.name){
+                  if (coug === "common"){
+                    commonname =data.name[coug].toLowerCase().trim();
+                    break;
+                  }
+                 }
+                //  console.log(commonname)
+                 if(commonname.includes(qinp)){
+                  return true;
+                 }
+                 else{
+                  return false;
+                 }
+               })
+               console.log(data)
+            display(bdiz, data);
+          });
+      }
+})
+
 const tog = document.querySelector(".toggle");
 tog.addEventListener("click", () => {
   document.body.classList.toggle("dark-background");
@@ -62,6 +101,7 @@ function show(anything) {
 let dp = document.querySelector(".custom-select");
 dp.onclick = () => {
   dp.classList.toggle("active");
+  location.reload(true);
 };
 
 function what(inp) {
@@ -135,7 +175,7 @@ function what(inp) {
                            </div>
                         <div class="right">
                             <h1>Top Level Domain: <small>${topLevelDomain}</small></h1>
-                            <h1>Currencies :<small> ${code}</small></h1>
+                           <h1>Currencies :<small> ${code}</small></h1>
                            <h1>Languages: ${languageDiv}</h1>
                         </div>
 
