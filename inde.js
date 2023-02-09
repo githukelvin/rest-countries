@@ -10,6 +10,7 @@ async function getAllCountries() {
     console.error(error);
   }
 }
+  
 function display(bdiz,data){
    bdiz.innerHTML = data
      .map(
@@ -99,7 +100,7 @@ function show(anything) {
 let dp = document.querySelector(".custom-select");
 dp.onclick = () => {
   dp.classList.toggle("active");
-  location.reload(true);
+  // location.reload(false);
 };
 
 function what(inp) {
